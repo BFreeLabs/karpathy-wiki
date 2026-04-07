@@ -21,14 +21,13 @@ your-wiki/
   .instructions/
     core/            ← data-agnostic methodology — DO NOT manually edit; sync from upstream
       prompts/       ← callable prompts (customize-template, ingest, lint, upgrade-from-template, …)
-      rules/         ← page conventions, size budgets, memory format, PDF extraction
+      rules/         ← page conventions, size budgets, PDF extraction
       templates/     ← page templates (source-summary, youtube-source, pdf-source, person-page)
     projects/        ← your project-specific methodology (created by customize-template)
     tools/           ← gitignored, per-installation helpers
-  raw/               ← source documents waiting for ingest (gitignored except memories/)
+  raw/               ← source documents waiting for ingest (gitignored)
     archive/         ← already-ingested sources
     assets/          ← attachments
-    memories/        ← atomized snippets for memory MCP servers
   wiki/              ← LLM-generated and LLM-maintained markdown (the published site)
     {hot,index,log,overview,tasks}.md
     people/ orgs/ tools/ open-source/ concepts/ analyses/ sources/
@@ -77,7 +76,7 @@ Drop an article, transcript, or PDF into `raw/`. (Obsidian Web Clipper makes thi
 
 > *"run the ingest prompt"*
 
-Claude reads the source, proposes a Phase 1 plan, waits for your approval, then writes the source summary, creates or updates entity/concept pages, cross-references everything, updates `index.md` and `hot.md`, generates memory snippets, archives the source, and commits.
+Claude reads the source, proposes a Phase 1 plan, waits for your approval, then writes the source summary, creates or updates entity/concept pages, cross-references everything, updates `index.md` and `hot.md`, archives the source, and commits.
 
 ### 5. Publish (optional)
 

@@ -30,14 +30,13 @@ your-wiki/
   .instructions/
     core/                             # Data-agnostic methodology — works for any second brain
       prompts/    {customize-template,ingest,lint,clean-data,orphans,task-review,upgrade-from-template}.md
-      rules/      {page-conventions,memory-rules,hot-cache-rules,index-rules,log-rules,overview-rules,tasks-rules,pdf-extraction}.md
+      rules/      {page-conventions,hot-cache-rules,index-rules,log-rules,overview-rules,tasks-rules,pdf-extraction}.md
       templates/  {source-summary,youtube-source,pdf-source,person-page}.md
     projects/                         # Project-specific methodology (declared per-wiki below)
     tools/                            # ⚠️ GITIGNORED — per-installation helpers
-  raw/                                # Source documents (gitignored except memories/)
+  raw/                                # Source documents (gitignored)
     archive/                          #   already-ingested sources
     assets/{,/archive/}               #   image/PDF attachments + their archive
-    memories/                         #   atomized snippets for memory MCP servers (versioned)
   wiki/                               # LLM-generated and LLM-maintained markdown
     {hot,index,log,overview,tasks}.md # State files (read hot.md first)
     people/   orgs/   tools/   open-source/   # Generic entity folders
@@ -68,7 +67,6 @@ The user invokes these by name (e.g. *"run the ingest prompt"*). Each one is a c
 | core | YouTube source (extends base) | `.instructions/core/templates/youtube-source.md` |
 | core | PDF source (extends base) | `.instructions/core/templates/pdf-source.md` |
 | core | Person page | `.instructions/core/templates/person-page.md` |
-| core | Memory snippet | (no template — see [`memory-rules.md`](.instructions/core/rules/memory-rules.md)) |
 
 ## Rules
 
@@ -77,7 +75,6 @@ Detailed rules live in `.instructions/core/rules/`. Read on demand, not preempti
 | File | Covers |
 |---|---|
 | `page-conventions.md` | Frontmatter, page types & folders, wikilinks, quality bar |
-| `memory-rules.md` | Memory snippet format, tag taxonomy, what to capture |
 | `hot-cache-rules.md` | What goes in `wiki/hot.md` and what doesn't (500-word cap) |
 | `overview-rules.md` | What goes in `wiki/overview.md` (1,500-word cap, synthesis only) |
 | `index-rules.md` | Format and content of `wiki/index.md` |
