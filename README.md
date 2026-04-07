@@ -139,13 +139,26 @@ Full protocol in [`.instructions/core/prompts/upgrade-from-template.md`](.instru
 
 ---
 
-## GitHub Pages setup
+## GitHub Pages setup (optional)
 
-This template ships with a GitHub Actions workflow ([`.github/workflows/publish.yml`](.github/workflows/publish.yml)) that builds your `wiki/` directory with [Quartz v4](https://quartz.jzhao.xyz/) and deploys it to GitHub Pages. The workflow runs:
+Publishing your wiki as a public site is **opt-in**. The template ships with the workflow file **disabled** so a fresh template clone never burns Actions minutes or accidentally publishes content. To activate it:
+
+### Enable the publish workflow
+
+```bash
+mv .github/workflows/publish.yml.disabled .github/workflows/publish.yml
+git add .github/workflows/
+git commit -m "chore: enable publish workflow"
+git push
+```
+
+The workflow ([`publish.yml`](.github/workflows/publish.yml.disabled)) builds your `wiki/` directory with [Quartz v4](https://quartz.jzhao.xyz/) and deploys it to GitHub Pages. Once enabled, it runs:
 
 - On version tags (`v*`)
 - On manual workflow dispatch
 - Nightly at midnight UTC
+
+If you decide later to stop publishing, rename it back to `.disabled` and push.
 
 ### Enable GitHub Pages on your repo
 
@@ -216,4 +229,4 @@ See [issue templates](.github/ISSUE_TEMPLATE) for the three accepted issue types
 
 ## License
 
-MIT. Use it, fork it, customize it, share it.
+MIT — see [LICENSE](LICENSE). Use it, fork it, customize it, share it.
