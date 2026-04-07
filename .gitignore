@@ -1,0 +1,30 @@
+# Personal source files (raw inputs — not versioned)
+raw/**/*.md
+raw/**/*.pdf
+raw/**/*.html
+
+# Exceptions — LLM-generated output inside raw/ that should be versioned
+!raw/memories/
+!raw/memories/*.md
+
+# Obsidian machine-specific state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Build artifacts
+node_modules/
+public/
+
+# Per-installation tools (PDF extractors, future helpers) — OS-specific, never committed.
+# Each session should bootstrap what it needs from .instructions/rules/pdf-extraction.md
+# (or similar rule files) into this directory locally.
+.instructions/tools/
+
+# OS / editor
+.DS_Store
+.smbdelete*
+.env
+*.log
+.vscode/
+.trash/
+.obsidian/graph.json

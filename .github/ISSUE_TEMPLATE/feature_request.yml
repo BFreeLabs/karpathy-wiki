@@ -1,0 +1,44 @@
+name: Feature request
+description: Suggest a new capability — a new prompt, a new template, a new lint check, support for a new source format, etc.
+title: "[feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Feature requests for the **template itself** are welcome. Topic-specific features (only useful for your particular wiki) are not — those belong in your own fork's `.instructions/projects/`.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the friction or gap you ran into. What were you trying to do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What new prompt, rule, template, or workflow would solve it? Sketch the protocol if you can.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Why doesn't an existing prompt or rule already cover this?
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      description: Confirm this is template-generic, not topic-specific.
+      options:
+        - label: This feature would benefit any wiki using the template, not just my own.
+          required: true
+        - label: I am willing to open a PR with the implementation.
+          required: false

@@ -1,0 +1,49 @@
+name: Bug report
+description: Something in the methodology is broken — a prompt produces wrong output, a rule contradicts itself, the lint script misses or false-flags a real issue, etc.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Bugs in `.instructions/core/` benefit every downstream wiki, so this is the most useful kind of report.
+
+  - type: input
+    id: which-file
+    attributes:
+      label: Which file is affected?
+      description: Path under `.instructions/core/` (e.g. `prompts/lint.md`, `rules/page-conventions.md`).
+      placeholder: .instructions/core/prompts/lint.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did the agent do? What did the rule say to do? Where did they diverge?
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: Ideally a minimal sequence — "run the X prompt against a wiki containing a page like this…"
+    validations:
+      required: true
+
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: Claude Code version, Obsidian version (if relevant), OS, anything else.
+    validations:
+      required: false

@@ -1,0 +1,64 @@
+name: Methodology change
+description: Propose a change to a rule, prompt, template, or piece of agent logic in `.instructions/core/`. Use this when the change is bigger than a bug fix and smaller than a new feature — i.e., refining how the agent already does something.
+title: "[methodology] "
+labels: ["methodology"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Methodology changes are how this template gets sharper over time. Examples: tightening a lint check, restructuring how `tasks.md` is pruned, changing the `hot.md` size budget, updating a page-convention rule.
+
+  - type: input
+    id: target-file
+    attributes:
+      label: Which file would change?
+      description: Path under `.instructions/core/`. If you're proposing a new file, write its proposed path.
+      placeholder: .instructions/core/rules/page-conventions.md
+    validations:
+      required: true
+
+  - type: dropdown
+    id: change-type
+    attributes:
+      label: Type of change
+      options:
+        - Tighten existing rule (more strict)
+        - Loosen existing rule (less strict)
+        - Restructure prompt protocol (change how a multi-phase prompt flows)
+        - Add new rule / prompt / template
+        - Deprecate / remove existing rule / prompt / template
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current behavior
+      description: Quote the relevant section of the existing rule/prompt, or describe what the agent does today.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-behavior
+    attributes:
+      label: Proposed behavior
+      description: Concretely, what should the rule say? What should the agent do differently?
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why is the new behavior better? What real situation prompted this? (Concrete examples carry more weight than abstract arguments.)
+    validations:
+      required: true
+
+  - type: textarea
+    id: migration
+    attributes:
+      label: Migration impact for downstream wikis
+      description: Will downstream wikis that pull this update need to do anything manually? (Most methodology changes are zero-touch — `upgrade-from-template` handles them.)
+    validations:
+      required: false

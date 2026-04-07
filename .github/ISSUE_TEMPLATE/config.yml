@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussion / question
+    url: https://github.com/bfreelabs/the-karpathy-wiki/discussions
+    about: For open-ended questions about how to use the template, ask in Discussions instead of opening an issue.
