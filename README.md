@@ -1,18 +1,14 @@
-# The Karpathy Wiki
+# Karpathy Wiki
 
-**A GitHub template for an LLM-maintained second brain.** Inspired by [Andrej Karpathy's LLM Wiki idea](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). You curate the sources; Claude does the writing, cross-referencing, linting, and filing. The whole wiki publishes as a static site to GitHub Pages.
+**A GitHub template for an LLM-maintained second brain.** Inspired by [Andrej Karpathy's LLM Wiki idea](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). You curate the sources; the LLM does the writing, cross-referencing, linting, and filing. The whole wiki publishes as a static site to GitHub Pages.
 
 This template is **topic-agnostic**. The methodology in `.instructions/core/` works for any subject — AI tools, food science, medieval history, home-lab infrastructure, paper reading lists, anything. The customize-template prompt walks you through scoping it to your topic in about 10 minutes.
 
----
+The best part: you don't have to memorize any commands to set this up. Just tell your agent what you want, and it does the rest. In a fresh Claude Code (or any agent that can run `gh` and `git`) session, paste:
 
-## Why this exists
+> *"Install the BFreeLabs/karpathy-wiki template into ~/Documents/my-second-brain, then run the customize-template prompt."*
 
-Personal knowledge bases die because the maintenance is boring. You collect articles, mean to summarize them, and never do. The pile grows until you stop trusting it.
-
-This template flips that: **the LLM does the maintenance**, and the humans-only files (sources, decisions, scope) are kept tiny and explicit so the LLM can never drift off-topic. Every operation runs through a named, versioned prompt under `.instructions/core/prompts/`. Every state file has a size budget. Every page has a template. Lint catches drift.
-
-The result is a wiki that grows steadily, stays internally consistent, and is fully browsable in Obsidian *and* publishable as a Quartz site, without you ever writing a summary by hand.
+The agent will fork the template into your account, clone it locally, read [`.instructions/core/prompts/customize-template.md`](.instructions/core/prompts/customize-template.md), and walk you through scoping the wiki to your topic. From clone to first ingest is one paragraph of natural language.
 
 ---
 
@@ -48,10 +44,10 @@ your-wiki/
 
 ### 1. Use the template
 
-Click the green **Use this template** button on [github.com/bfreelabs/the-karpathy-wiki](https://github.com/bfreelabs/the-karpathy-wiki), or:
+Click the green **Use this template** button on [github.com/BFreeLabs/karpathy-wiki](https://github.com/BFreeLabs/karpathy-wiki), or:
 
 ```bash
-gh repo create my-second-brain --template bfreelabs/the-karpathy-wiki --public
+gh repo create my-second-brain --template BFreeLabs/karpathy-wiki --public
 gh repo clone my-second-brain
 cd my-second-brain
 ```
@@ -86,6 +82,49 @@ Claude reads the source, proposes a Phase 1 plan, waits for your approval, then 
 ### 5. Publish (optional)
 
 See [GitHub Pages setup](#github-pages-setup) below.
+
+---
+
+## Using a different agent (Codex, Cursor, Aider, Continue, etc.)
+
+This template was built around [Claude Code](https://claude.ai/code), but **nothing in `.instructions/core/` is Claude-specific**. The prompts, rules, and templates are plain markdown — any coding agent that can read files and run commands can drive this wiki. The only thing that's Claude-specific is the file *name* `CLAUDE.md`, which Claude Code auto-loads on every session.
+
+To use a different agent, do **one** of the following:
+
+### Option A — Rename `CLAUDE.md` to whatever your agent auto-loads
+
+Most modern coding agents have an auto-loaded project instructions file. Pick the right one for your tool:
+
+
+| Agent                   | Auto-loaded file                                                              | Action                                            |
+| ------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------- |
+| **Claude Code**         | `CLAUDE.md`                                                                   | Leave as-is                                       |
+| **OpenAI Codex CLI**    | `AGENTS.md`                                                                   | `mv CLAUDE.md AGENTS.md`                          |
+| **Cursor**              | `.cursorrules` or `.cursor/rules/*.mdc`                                       | `mv CLAUDE.md .cursorrules` (or split into rules) |
+| **Aider**               | `CONVENTIONS.md` (loaded via `--read CONVENTIONS.md` or in `.aider.conf.yml`) | `mv CLAUDE.md CONVENTIONS.md`                     |
+| **Continue**            | `.continue/rules/*.md`                                                        | Move to`.continue/rules/wiki.md`                  |
+| **GitHub Copilot Chat** | `.github/copilot-instructions.md`                                             | `mv CLAUDE.md .github/copilot-instructions.md`    |
+| **Windsurf**            | `.windsurfrules`                                                              | `mv CLAUDE.md .windsurfrules`                     |
+
+After renaming, also update the small handful of cross-references in `README.md` and `.instructions/core/prompts/*.md` that mention "CLAUDE.md" by name — or just ask your agent to do it: *"Rename CLAUDE.md to AGENTS.md and update every reference."*
+
+### Option B — Keep `CLAUDE.md` and point your agent at it manually
+
+If your agent doesn't auto-load any file, just tell it where the project rules live at the start of every session:
+
+> *"Read CLAUDE.md before doing anything else. It defines this project's scope, rules, and which prompts to invoke."*
+
+This works with any LLM that can read files (ChatGPT with file access, Gemini, local Ollama setups via `aider --read CLAUDE.md`, etc.). It's slightly less ergonomic than auto-loading but fully functional.
+
+### Why the methodology is agent-agnostic
+
+The whole design assumes the agent's job is to *read a prompt file and follow its protocol*, not to remember rules from training. So as long as your agent can:
+
+1. Read markdown files on demand
+2. Edit files
+3. Run shell commands (`git`, `gh`, optional `pypdf`)
+
+…it can drive this template. The author tests primarily on Claude Code, but PRs improving compatibility notes for other agents are welcome.
 
 ---
 
@@ -211,7 +250,7 @@ That's it. The wiki grows itself.
 
 ## Contributing methodology back upstream
 
-Every time you find a methodology improvement — a sharper lint rule, a new page template, a fixed prompt — please open a PR against [bfreelabs/the-karpathy-wiki](https://github.com/bfreelabs/the-karpathy-wiki) touching only files under `.instructions/core/`. Topic-specific or wiki-specific changes will be rejected; that's the whole point of the `core/` boundary.
+Every time you find a methodology improvement — a sharper lint rule, a new page template, a fixed prompt — please open a PR against [BFreeLabs/karpathy-wiki](https://github.com/BFreeLabs/karpathy-wiki) touching only files under `.instructions/core/`. Topic-specific or wiki-specific changes will be rejected; that's the whole point of the `core/` boundary.
 
 See [issue templates](.github/ISSUE_TEMPLATE) for the three accepted issue types: bug report, feature request, and methodology change.
 

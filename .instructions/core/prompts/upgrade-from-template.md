@@ -2,7 +2,7 @@
 
 > Use this prompt by saying *"run the upgrade-from-template prompt"*, *"check for methodology updates"*, or *"sync from upstream template"*.
 
-This prompt pulls methodology improvements from the upstream template repo (`bfreelabs/the-karpathy-wiki`) into the current wiki **without touching any topic-specific content**. The user runs it whenever they want to know what's new upstream and pick which improvements to adopt.
+This prompt pulls methodology improvements from the upstream template repo (`BFreeLabs/karpathy-wiki`) into the current wiki **without touching any topic-specific content**. The user runs it whenever they want to know what's new upstream and pick which improvements to adopt.
 
 The whole point: methodology evolves over time. New rules, better prompts, sharper templates. You should not have to manually diff folders or remember which files were updated when. The agent does the comparison and presents a curated list.
 
@@ -35,7 +35,7 @@ git remote get-url template 2>/dev/null
 If missing, propose adding it and wait for user approval:
 
 ```bash
-git remote add template https://github.com/bfreelabs/the-karpathy-wiki.git
+git remote add template https://github.com/BFreeLabs/karpathy-wiki.git
 git fetch template
 ```
 
@@ -120,7 +120,7 @@ For approved CLAUDE.md table updates, edit only the affected table rows. Never t
 
    - <list of files>
 
-   Source: bfreelabs/the-karpathy-wiki@<commit-sha>
+   Source: BFreeLabs/karpathy-wiki@<commit-sha>
    ```
 4. Wait for the user to approve the commit. Do not push.
 
