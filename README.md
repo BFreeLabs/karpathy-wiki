@@ -177,26 +177,26 @@ Full protocol in [`.instructions/core/prompts/upgrade-from-template.md`](.instru
 
 ---
 
-## GitHub Pages setup (optional)
+## GitHub Pages setup
 
-Publishing your wiki as a public site is **opt-in**. The template ships with the workflow file **disabled** so a fresh template clone never burns Actions minutes or accidentally publishes content. To activate it:
+This template ships with a [Quartz v4](https://quartz.jzhao.xyz/) publish workflow ([`.github/workflows/publish.yml`](.github/workflows/publish.yml)) **enabled by default**. It builds your `wiki/` directory and deploys to GitHub Pages on:
 
-### Enable the publish workflow
+- Version tags (`v*`)
+- Manual workflow dispatch
+- Nightly at midnight UTC
+
+### Don't want to publish? Disable it
+
+If you'd rather keep your wiki private (or just not burn Actions minutes until you're ready), rename the workflow file:
 
 ```bash
-mv .github/workflows/publish.yml.disabled .github/workflows/publish.yml
+mv .github/workflows/publish.yml .github/workflows/publish.yml.disabled
 git add .github/workflows/
-git commit -m "chore: enable publish workflow"
+git commit -m "chore: disable publish workflow"
 git push
 ```
 
-The workflow ([`publish.yml`](.github/workflows/publish.yml.disabled)) builds your `wiki/` directory with [Quartz v4](https://quartz.jzhao.xyz/) and deploys it to GitHub Pages. Once enabled, it runs:
-
-- On version tags (`v*`)
-- On manual workflow dispatch
-- Nightly at midnight UTC
-
-If you decide later to stop publishing, rename it back to `.disabled` and push.
+GitHub Actions only picks up files matching `*.yml` / `*.yaml`, so the renamed file is fully inert. Rename it back when you're ready to publish.
 
 ### Enable GitHub Pages on your repo
 
