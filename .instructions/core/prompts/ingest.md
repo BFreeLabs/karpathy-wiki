@@ -6,7 +6,7 @@ You are ingesting one or more new source documents into the wiki. Follow this pr
 
 ## Inputs
 - New `.md`, `.html`, `.pdf`, or transcript files in `raw/` (not in `raw/archive/`).
-- If the user names a specific file, ingest only that one. Otherwise list every un-archived source file directly under `raw/` and confirm the list with the user before proceeding. Skip the standard subdirectories: `raw/archive/`, `raw/assets/`, `raw/memories/`, and any project-specific data subdirectories declared in `CLAUDE.md`.
+- If the user names a specific file, ingest only that one. Otherwise list every un-archived source file directly under `raw/` and confirm the list with the user before proceeding. Skip the standard subdirectories: `raw/archive/`, `raw/assets/`, and any project-specific data subdirectories declared in `CLAUDE.md`.
 
 ## PDF sources
 
@@ -44,19 +44,15 @@ After approval, for each source:
 4. Rewrite `wiki/hot.md` per [hot-cache rules](../rules/hot-cache-rules.md). Max 500 words. Rewrite, don't append.
 5. Update `wiki/tasks.md` with any new tools/projects/repos worth investigating, as `- [ ] **Name** — why [[source-page]]`. Skip anything already covered by an existing wiki page.
 
-### Phase 4 — Generate memories
-
-Create 3–8 atomized memory files in `raw/memories/` per [memory rules](../rules/memory-rules.md). Skip anything already obvious from a wiki page title.
-
-### Phase 5 — Archive & commit
+### Phase 4 — Archive & commit
 
 1. Move the source file from `raw/` to `raw/archive/`.
    - **For PDF sources**: also move the asset from `raw/assets/<filename>.pdf` to `raw/assets/archive/<filename>.pdf`.
-2. Stage all changed wiki files and new memory files.
+2. Stage all changed wiki files.
 3. Commit with message `ingest: <source-slug>`. Never add `Co-Authored-By` or any Claude attribution.
 4. Each source is its own commit (rollback point).
 
-### Phase 6 — Lint reminder
+### Phase 5 — Lint reminder
 
 Check the count of `## [` ingest entries in `wiki/log.md`. If it's a multiple of 5 since the last lint, remind the user: *"You've ingested X sources — recommend running the lint prompt to catch orphans, duplicates, and stale content."*
 
